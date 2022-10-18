@@ -1,0 +1,13 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}New Home{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_admin_home_index') }}" class="btn btn-dark btn-sm">Retour à la liste</a>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mt-3">Nouvelle Home</h1>
+    </div>
+
+    {{ include('admin_home/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}
