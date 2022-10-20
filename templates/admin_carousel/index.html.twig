@@ -1,0 +1,50 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Gallerie{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Gallerie d'images</h1>
+        <a href="{{ path('app_admin_carousel_new') }}" class="btn btn-dark">Ajouter une image</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th class="th-img">Image</th>
+                <th class="th-title">Titre</th>
+                {# <th>Description</th> #}
+                <th>Tag</th>
+                <th class="text-end">Voir/Éditer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carousel in carousels %}
+            <tr>
+                <td>{{ carousel.id }}</td>
+                <td>
+                    <a href="{{ asset('images/carousels/' ~ carousel.imageName) }}" data-lightbox="{{ carousel.imageName }}">
+                        <img src="{{asset('images/carousels/' ~ carousel.imageName)}}" class="img-list" alt="{{ carousel.imageName }}">
+                    </a>
+                </td>
+                <td>{{ carousel.title }}</td>
+                {# <td>{{ carousel.text }}</td> #}
+                <td>{{ carousel.tag }}</td>
+                <td class="text-end">
+                    <a href="{{ path('app_admin_carousel_show', {'id': carousel.id}) }}" class="btn btn-dark">
+                        <i class="align-middle" data-feather="eye"></i>
+                    </a>
+                    <a href="{{ path('app_admin_carousel_edit', {'id': carousel.id}) }}" class="btn btn-success">
+                        <i class="align-middle" data-feather="edit-3"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

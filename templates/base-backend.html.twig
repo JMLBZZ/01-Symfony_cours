@@ -10,6 +10,7 @@
             {% endblock %}
         </title>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/styles-back.min.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -19,65 +20,72 @@
                 <div class="sidebar-content js-simplebar">
                     <a class="sidebar-brand" href="{{path('app_admin_dashboard')}}">
                         <span class="align-middle">
-                            Admin de la librairies
+                            Admin de la librairie
                         </span>
                     </a>
                     <ul class="sidebar-nav">
                         <li class="sidebar-header">
                             Pages
                         </li>
-                        <li class="sidebar-item active">
-                            <a class="sidebar-link" href="{{path('app_admin_dashboard')}}"><!-- on change le lien vers un twig du name du fichier-->
-                                <i class="align-middle" data-feather="sliders"></i>
-                                <span class="align-middle">
-                                    Tableau de bord
-                                </span>
-                            </a>
-                        </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{path('app_admin_home_index')}}">
+                            <a class="sidebar-link" href="{{path('app_admin_dashboard')}}">
                                 <i class="align-middle" data-feather="home"></i>
                                 <span class="align-middle">
                                     Accueil
                                 </span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="pages-sign-in.html">
-                                <i class="align-middle" data-feather="log-in"></i>
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{path('app_admin_home_index')}}"><!-- on change le lien vers un twig du name du fichier-->
+                                <i class="align-middle" data-feather="sliders"></i>
                                 <span class="align-middle">
-                                    Sign In
+                                    Tableau de bord
                                 </span>
                             </a>
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="pages-sign-up.html">
-                                <i class="align-middle" data-feather="user-plus"></i>
+                            <a class="sidebar-link" href="{{path('app_admin_carousel_index')}}">
+                                <i class="align-middle" data-feather="trello"></i>
                                 <span class="align-middle">
-                                    Sign Up
-                                                                                                                                            
-                                                                                                        
-                                                                    
+                                    Gallerie
                                 </span>
                             </a>
                         </li>
+
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="pages-blank.html">
+                            <a class="sidebar-link" href="{{path('app_admin_author_index')}}">
+                                <i class="align-middle" data-feather="user"></i>
+                                <span class="align-middle">
+                                    Auteur
+                                </span>
+                            </a>
+                        </li>
+
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{path('app_admin_book_index')}}">
                                 <i class="align-middle" data-feather="book"></i>
                                 <span class="align-middle">
-                                    Blank
-                                                                                                                                            
-                                                                                                        
-                                                                    
+                                    Livres
                                 </span>
                             </a>
                         </li>
+
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{path('app_admin_book_page_index')}}">
+                                <i class="align-middle" data-feather="file-text"></i>
+                                <span class="align-middle">
+                                    Pages
+                                </span>
+                            </a>
+                        </li>
+
+
                         <li class="sidebar-header">
                             Tools & Components
-                                                                                                                            
-                                                                                                            
-                                                                                
-                                                    
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-buttons.html">
@@ -543,6 +551,7 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/lightbox.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

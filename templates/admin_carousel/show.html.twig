@@ -1,0 +1,46 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Informations de l'image{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_admin_carousel_index') }}" class="btn btn-dark btn-sm">Retour à la liste</a>
+    <h1 class="mt-3">Informations de l'image</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carousel.id }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+
+                    <td>
+                        <a href="{{ asset('images/carousels/' ~ carousel.imageName) }}" data-lightbox="{{ carousel.imageName }}">
+                            <img src="{{asset('images/carousels/' ~ carousel.imageName)}}" class="img-list" alt="{{ carousel.imageName }}">
+                        </a>
+                    </td>
+
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ carousel.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ carousel.text }}</td>
+            </tr>
+            <tr>
+                <th>Tag</th>
+                <td>{{ carousel.tag }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="{{ path('app_admin_carousel_edit', {'id': carousel.id}) }}" class="btn btn-success">
+            <i class="align-middle" data-feather="edit-3"></i>
+        </a>
+        {{ include('admin_carousel/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
