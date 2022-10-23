@@ -13,10 +13,10 @@
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
-                <th>Description</th>
+                {# <th>Description</th> #}
                 <th>Couverture</th>
-                <th>Modifié le</th>
-                <th>Slug</th>
+                {# <th>Modifié le</th> #}
+                {# <th>Slug</th> #}
                 <th>Activer ?</th>
                 <th class="text-end">Voir/Éditer</th>
             </tr>
@@ -26,15 +26,15 @@
             <tr>
                 <td>{{ book.id }}</td>
                 <td>{{ book.title }}</td>
-                <td>{{ book.description }}</td>
+                {# <td>{{ book.description }}</td> #}
                 <td>
                     <a href="{{ asset('images/book/' ~ book.imageName) }}" data-lightbox="{{ book.imageName }}">
                         <img src="{{asset('images/book/' ~ book.imageName)}}" class="img-list" alt="{{ book.imageName }}">
                     </a>
                 </td>
-                <td>{{ book.updatedAt ? book.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ book.slug }}</td>
-                <td>{{ book.isActive ? 'Yes' : 'No' }}</td>
+                {# <td>{{ book.updatedAt ? book.updatedAt|date('d-m-Y H:i:s') : '' }}</td> #}
+                {# <td>{{ book.slug }}</td> #}
+                <td>{{ book.isActive ? 'Oui' : 'Non' }}</td>
 
                 <td class="text-end">
                     <a href="{{ path('app_admin_book_show', {'id': book.id}) }}" class="btn btn-dark">
@@ -48,7 +48,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">Aucune donnée trouvée</td>
+                <td colspan="5">Aucune donnée trouvée</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -1,0 +1,43 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Catégories</h1>
+        <a href="{{ path('app_admin_book_category_new') }}" class="btn btn-dark">Ajouter une catégorie</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th class="text-end">Voir/Éditer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book_category in book_categories %}
+            <tr>
+                <td>{{ book_category.id }}</td>
+                <td>{{ book_category.name }}</td>
+                <td>{{ book_category.description }}</td>
+                <td class="text-end">
+                    <a href="{{ path('app_admin_book_category_show', {'id': book_category.id}) }}" class="btn btn-dark">
+                        <i class="align-middle" data-feather="eye"></i>
+                    </a>
+                    <a href="{{ path('app_admin_book_category_edit', {'id': book_category.id}) }}" class="btn btn-success">
+                        <i class="align-middle" data-feather="edit-3"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+            <td colspan="4">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

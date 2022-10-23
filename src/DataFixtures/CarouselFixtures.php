@@ -12,17 +12,17 @@ class CarouselFixtures extends Fixture
     {
         $carousel = new Carousel();
         $carousel->setTag("home");
-        $carousel->setImageName("bmw.jpeg");
+        $carousel->setImageName("manga.jpg");
         $manager->persist($carousel);
 
         $carousel = new Carousel();
         $carousel->setTag("home");
-        $carousel->setImageName("honda.jpeg");
+        $carousel->setImageName("manga2.jpg");
         $manager->persist($carousel);
 
         $carousel = new Carousel();
         $carousel->setTag("home");
-        $carousel->setImageName("lambo.jpeg");
+        $carousel->setImageName("livres.jpg");
         $manager->persist($carousel);
 
         $manager->flush();

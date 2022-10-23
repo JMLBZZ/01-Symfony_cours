@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_admin_book_category_delete', {'id': book_category.id}) }}" onsubmit="return confirm('Confirmez-vous la suppression ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('Supprimer' ~ book_category.id) }}">
+    <button class="btn btn-danger">
+        <i class="align-middle" data-feather="trash-2"></i>
+    </button>
+</form>

@@ -1,11 +1,11 @@
 {% extends 'base-backend.html.twig' %}
 
-{% block title %}Auteurs/Autrices{% endblock %}
+{% block title %}Auteur(e)s{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-between align-items-center">
-        <h1>Auteurs/Autrices</h1>
-        <a href="{{ path('app_admin_author_new') }}" class="btn btn-dark">Nouvel auteur</a>
+        <h1>Auteur(e)s</h1>
+        <a href="{{ path('app_admin_author_new') }}" class="btn btn-dark">Nouvel(le) auteur(e)</a>
     </div>
 
     <table class="table">
@@ -15,12 +15,12 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Pseudo</th>
-                <th>Biographie</th>
+                {# <th>Biographie</th> #}
                 <th>Né(e) le</th>
                 <th>Décédé(e) le</th>
                 <th>Photo</th>
-                <th>Modifié le</th>
-                <th>Slug</th>
+                {# <th>Modifié le</th> #}
+                {# <th>Slug</th> #}
                 <th class="text-end">Voir/Éditer</th>
             </tr>
         </thead>
@@ -31,16 +31,16 @@
                 <td>{{ author.name }}</td>
                 <td>{{ author.firstName }}</td>
                 <td>{{ author.pseudo }}</td>
-                <td>{{ author.biography }}</td>
-                <td>{{ author.birthdate ? author.birthdate|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d-m-Y H:i:s') : '' }}</td>
+                {# <td>{{ author.biography }}</td> #}
+                <td>{{ author.birthdate ? author.birthdate|date('d-m-Y') : '' }}</td>
+                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d-m-Y') : '' }}</td>
                 <td>
                     <a href="{{ asset('images/author/' ~ author.imageName) }}" data-lightbox="{{ author.imageName }}">
                         <img src="{{asset('images/author/' ~ author.imageName)}}" class="img-list" alt="{{ author.imageName }}">
                     </a>
                 </td>                
-                <td>{{ author.updatedAt ? author.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ author.slug }}</td>
+                {# <td>{{ author.updatedAt ? author.updatedAt|date('d-m-Y H:i:s') : '' }}</td> #}
+                {# <td>{{ author.slug }}</td> #}
                 <td class="text-end">
                     <a href="{{ path('app_admin_author_show', {'id': author.id}) }}" class="btn btn-dark">
                         <i class="align-middle" data-feather="eye">
@@ -53,7 +53,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">Aucune donnée trouvée</td>
+                <td colspan="9">Aucune donnée trouvée</td>
             </tr>
         {% endfor %}
         </tbody>

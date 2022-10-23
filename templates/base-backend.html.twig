@@ -58,7 +58,7 @@
                             <a class="sidebar-link" href="{{path('app_admin_author_index')}}">
                                 <i class="align-middle" data-feather="user"></i>
                                 <span class="align-middle">
-                                    Auteur
+                                    Auteur(e)s
                                 </span>
                             </a>
                         </li>
@@ -73,6 +73,14 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{path('app_admin_book_category_index')}}">
+                                <i class="align-middle" data-feather="grid"></i>
+                                <span class="align-middle">
+                                    Categories
+                                </span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{path('app_admin_book_page_index')}}">
@@ -552,6 +560,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/lightbox.min.js') }}"></script>
+        <script src="{{ asset('js/add-collection-widget.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

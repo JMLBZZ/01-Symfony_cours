@@ -1,10 +1,10 @@
 {% extends 'base-backend.html.twig' %}
 
-{% block title %}Auteur/Autrice{% endblock %}
+{% block title %}Auteur(e){% endblock %}
 
 {% block body %}
     <a href="{{ path('app_admin_author_index') }}" class="btn btn-dark btn-sm">Retour à la liste</a>
-    <h1 class="mt-3">Auteur/Autrice</h1>
+    <h1 class="mt-3">Auteur(e)</h1>
 
     <table class="table">
         <tbody>
@@ -25,16 +25,12 @@
                 <td>{{ author.pseudo }}</td>
             </tr>
             <tr>
-                <th>Biographie</th>
-                <td>{{ author.biography }}</td>
-            </tr>
-            <tr>
                 <th>Né(e) le</th>
-                <td>{{ author.birthdate ? author.birthdate|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ author.birthdate ? author.birthdate|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Décédé(e) le</th>
-                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Photo</th>
@@ -45,13 +41,17 @@
                 </td>   
             </tr>
             <tr>
+                <th>Biographie</th>
+                <td>{{ author.biography }}</td>
+            </tr>
+            {# <tr>
                 <th>Modifié le</th>
                 <td>{{ author.updatedAt ? author.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Slug</th>
                 <td>{{ author.slug }}</td>
-            </tr>
+            </tr> #}
         </tbody>
     </table>
 

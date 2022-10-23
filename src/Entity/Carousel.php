@@ -22,7 +22,7 @@ class Carousel
     private ?string $imageName = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
-    #[Vich\UploadableField(mapping: 'carousel', fileNameProperty: 'imageName')]
+    #[Vich\UploadableField(mapping: 'carousels', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]

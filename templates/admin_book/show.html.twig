@@ -17,10 +17,6 @@
                 <td>{{ book.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
-                <td>{{ book.description }}</td>
-            </tr>
-            <tr>
                 <th>Couverture</th>
                 <td>
                     <a href="{{ asset('images/book/' ~ book.imageName) }}" data-lightbox="{{ book.imageName }}">
@@ -29,16 +25,20 @@
                 </td>
             </tr>
             <tr>
+                <th>Description</th>
+                <td>{{ book.description }}</td>
+            </tr>
+            {# <tr>
                 <th>Modifié le</th>
                 <td>{{ book.updatedAt ? book.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
             </tr>
             <tr>
-            <th>Slug</th>
-            <td>{{ book.slug }}</td>
-            </tr>
+                <th>Slug</th>
+                <td>{{ book.slug }}</td>
+            </tr> #}
             <tr>
                 <th>Activer ?</th>
-                <td>{{ book.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ book.isActive ? 'Oui' : 'Non' }}</td>
             </tr>
         </tbody>
     </table>

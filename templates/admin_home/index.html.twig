@@ -14,7 +14,7 @@
                 <th>Titre</th>
                 {# <th>Texte</th> #}
                 <th>Signature</th>
-                <th>Activer?</th>
+                <th>Activé ?</th>
                 <th class="text-end">Voir/Éditer</th>
             </tr>
         </thead>
@@ -26,7 +26,7 @@
                 <td>{{ home.titre }}</td>
                 {# <td>{{ home.texte }}</td> #}
                 <td>{{ home.signature }}</td>
-                <td>{{ home.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ home.isActive ? 'Oui' : 'Non' }}</td>
                 <td class="text-end">
                     <a href="{{ path('app_admin_home_show', {'id': home.id}) }}" class="btn btn-dark">
                         <i class="align-middle" data-feather="eye">
@@ -40,7 +40,7 @@
             </tr>
         {% else %}
             <tr>
-                {# fusion des colonnes du tableau : ici 5 car on a enlevé la colonne texte #}
+                {# fusion des colonnes du tableau : ici 5 car on a enlevé la colonne texte pour la visualisation#}
                 <td colspan="5">Aucune donnée trouvée</td>
             </tr>
         {% endfor %}
