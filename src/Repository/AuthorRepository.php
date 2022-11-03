@@ -39,6 +39,23 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
+    public function search($value): array
+    {
+        return $this->createQueryBuilder('a')// "a" est l'allias de table qui correspond à la première lettre de l'entité (author => a)
+            ->where("a.firstName LIKE :val")//je demande les prénoms qui ressemble à ce qui est recherché
+            ->orWhere('a.name LIKE :val')
+            ->orWhere('a.pseudo LIKE :val')
+            ->setParameter('val', '%'.$value.'%')//% => peut importe la chaine de caractère (avant et/ou après)
+            ->orderBy('a.id', 'DESC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
+
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
+#[Vich\Uploadable]
+
 class Book
 {
     #[ORM\Id]
@@ -37,7 +39,7 @@ class Book
     #[ORM\Column]
     private ?bool $isActive = null;
 
-    #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\ManyToOne(inversedBy: 'books', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Author $author = null;
 
@@ -51,12 +53,16 @@ class Book
     #[ORM\JoinColumn(nullable: false)]
     private ?BookCategory $bookCategory = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'books')]
+    private Collection $users;
+
 // ##################################################################### //
 // ############################ CONSTRUCTEUR ########################### //
 // ##################################################################### //
     public function __construct()
     {
         $this->bookPages = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 // ##################################################################### //
@@ -214,6 +220,33 @@ class Book
     public function setBookCategory(?BookCategory $bookCategory): self
     {
         $this->bookCategory = $bookCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeBook($this);
+        }
 
         return $this;
     }

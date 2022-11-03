@@ -46,23 +46,29 @@ class AuthorType extends AbstractType
                 'format' => 'yyyy-MM-dd', 
                 "label"=>"Date de décès de l'auteur(e)",
                 "required"=>false])
-            ->add('books', CollectionType::class, [
-                "entry_type"=>BookType::class,
-                "allow_add"=>true,
-                "allow_delete"=>true,
-                "by_reference"=>false,
-                "label"=>false])
 
             ->remove('imageName')
             ->remove('updatedAt')
             ->remove('slug')
         ;
+        if ($options['hasBooks']){
+            $builder
+            ->add('books', CollectionType::class, [
+                "entry_type"=>BookType::class,
+                "entry_options"=>["fromAuthor"=>true],
+                "allow_add"=>true,
+                "allow_delete"=>true,
+                "by_reference"=>false,
+                "label"=>false]);
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Author::class,
+            'hasBooks' => true
         ]);
     }
 }

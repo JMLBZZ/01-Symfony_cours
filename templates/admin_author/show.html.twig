@@ -26,11 +26,11 @@
             </tr>
             <tr>
                 <th>Né(e) le</th>
-                <td>{{ author.birthdate ? author.birthdate|date('d-m-Y') : '' }}</td>
+                <td>{{ author.birthdate ? author.birthdate|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Décédé(e) le</th>
-                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d-m-Y') : '' }}</td>
+                <td>{{ author.dateOfDeath ? author.dateOfDeath|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Photo</th>
@@ -46,7 +46,7 @@
             </tr>
             {# <tr>
                 <th>Modifié le</th>
-                <td>{{ author.updatedAt ? author.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ author.updatedAt ? author.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Slug</th>

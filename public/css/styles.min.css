@@ -1,1 +1,1 @@
-body{background:url(../images/sayagata-400px.png)}
+﻿body{background:url(../images/sayagata-400px.png)}body .help-text{color:orange}body .help-text::before{font-family:"Font Awesome 6 Free";content:"";font-weight:900;margin-right:5px}body .bt-like{position:absolute;bottom:10px;right:10px;color:orange;cursor:pointer}

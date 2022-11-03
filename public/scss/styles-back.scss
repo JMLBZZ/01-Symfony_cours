@@ -9,6 +9,20 @@ body{
     }
 }
 
+.pagination{
+    .active{
+        .page-link{
+            background-color: black;
+            border-color: black;
+            color: white;
+        }
+    }
+    .page-link{
+        color: black;
+    }
+}
+
+
 .img-list {
     width: 100%;
     max-width: 150px;
@@ -21,3 +35,4 @@ body{
 .th-title{
     width: 500px;
 }
+

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex flex-wrap">
+
+        <div class="col-12 col-md-3 col-lg-2">
+            <a href="{{ asset('images/book/' ~ book.imageName) }}" data-lightbox="{{ book.title }}">
+                <img src="{{ asset('images/book/' ~ book.imageName) }}" alt="{{ book.title }}" class="img-fluid">
+            </a>
+        </div>
+
+        <div class="col-12 col-md-9 col-lg-10 px-5">
+            <h1>{{ book.title }}</h1>
+            <div>
+                <h5>Auteur(e) : </h5> <a href="{{path('app_front_author_show', { slug:book.author.slug})}}">{{book.author.displayName}}</a>
+            </div>
+            {% if book is not null %}
+                <div class="py-3">
+                    <h5>Synopsis :</h5> {{ book.description|raw }}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}

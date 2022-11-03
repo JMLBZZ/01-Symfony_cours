@@ -16,7 +16,7 @@ class FrontHomeController extends AbstractController
     public function index(HomeRepository $homeRepository, CarouselRepository $carouselRepository): Response
     {
         $content = $homeRepository->findOneBy(["isActive"=>true]);
-        $carousels = $carouselRepository->findBy(["tag"=>"home"]);
+        $carousels = $carouselRepository->findBy(["tag"=>"home"], ["id"=>"DESC"]);
         return $this->render('front_home/index.html.twig', [
             'contenu' => $content,
             "carousels" => $carousels,

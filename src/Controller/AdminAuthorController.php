@@ -5,20 +5,32 @@ namespace App\Controller;
 use App\Entity\Author;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/author')]
 class AdminAuthorController extends AbstractController
 {
-    #[Route('/', name: 'app_admin_author_index', methods: ['GET'])]
-    public function index(AuthorRepository $authorRepository): Response
+    #[Route('/', name: 'app_admin_author_index', methods: ['GET', 'POST'])]
+    public function index(AuthorRepository $authorRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        if (!is_null($request->request->get("search"))){
+                $query = $authorRepository->search($request->request->get("search"));
+            }else{
+                $query = $authorRepository->findBy([], ["id"=>"DESC"]);
+            }
+        $authors = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+
         return $this->render('admin_author/index.html.twig', [
-            'authors' => $authorRepository->findAll(),
+            'authors' => $authors,
         ]);
     }
 
@@ -43,7 +55,24 @@ class AdminAuthorController extends AbstractController
             }
             $author->setSlug($sluggerInterface->slug(strtolower($s)));
 // ------------------------ //
+            // prise en charge des slug des livres
+            // dd($form->getData()->getBooks());
+            if(count($form->getData()->getBooks())>0){
+                foreach($form->getData()->getBooks() as $book){
+                    $book->setSlug($sluggerInterface ->slug($book->getTitle()));
+                }
+            }
+
             $authorRepository->save($author, true);
+
+// ##################################################################### //
+// ########################### FLASH MESSAGE ########################### //
+// ##################################################################### //
+            $this->addFlash(
+                'success',
+                'Auteur(e) ajouté(e)!'
+            );
+// ##################################################################### //
 
             return $this->redirectToRoute('app_admin_author_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,6 +100,12 @@ class AdminAuthorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $authorRepository->save($author, true);
 
+            // mise en place du Flash message
+            $this->addFlash(
+                'success',
+                'Auteur(e) modifié(e)!'
+            );
+
             return $this->redirectToRoute('app_admin_author_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -85,7 +120,14 @@ class AdminAuthorController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$author->getId(), $request->request->get('_token'))) {
             $authorRepository->remove($author, true);
+        // mise en place du Flash message
+            $this->addFlash(
+                'danger',
+                'Auteur(e) supprimé(e)!'
+            );
         }
+
+
 
         return $this->redirectToRoute('app_admin_author_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -18,7 +18,7 @@ class AdminBookController extends AbstractController
     public function index(BookRepository $bookRepository): Response
     {
         return $this->render('admin_book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $bookRepository->findBy([], ["id"=>"DESC"]),
         ]);
     }
 
@@ -53,7 +53,7 @@ class AdminBookController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_book_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Book $book, BookRepository $bookRepository): Response
     {
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class, $book, ["imageRequired"=>false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
+#[Vich\Uploadable]
 class Author
 {
     #[ORM\Id]
@@ -46,11 +47,13 @@ class Author
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfDeath = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $books;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    private $displayName;
 
 // ##################################################################### //
 // ############################ CONSTRUCTEUR ########################### //
@@ -248,6 +251,40 @@ class Author
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of displayName
+     */ 
+    public function getDisplayName()
+    {
+        if (!is_null ($this->pseudo)){
+            $this->displayName = $this->pseudo;
+        }else{
+            if(!is_null($this->firstName)){
+                $this->displayName = $this->firstName;
+            }
+            if(!is_null($this->name) && strlen($this->displayName)>0){
+                $this->displayName .= " ".$this->name;
+            }else{
+                $this->displayName = $this->name;
+            }
+        }
+
+        return $this->displayName;
+    }
+
+    /**
+     * Set the value of displayName
+     *
+     * @return  self
+     */ 
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
 
         return $this;
     }

@@ -26,17 +26,15 @@ class BookType extends AbstractType
             ->add('title', TextType::class, [ 
                 "label"=>"Titre du livre", 
                 "required"=>true])
-            ->add('description', CKEditorType::class, ["label"=>"Synopsis", "required" => false])
+            ->add('description', CKEditorType::class, [
+                "label"=>"Synopsis", 
+                "required" => false])
             ->add('imageFile', FileType::class, [
                 "help"=>"Poids max : 2Mo", 
                 "help_attr"=>["class"=>"text-info"],
                 "label" => "Photo de couverture", 
-                "required" => false])
+                "required" => $options["imageRequired"]])
                 
-            ->add('author', EntityType::class, [
-                "class"=>Author::class,
-                "label"=>"Auteur(e)",
-                "required"=>true])
             ->add('book_category', EntityType::class, [
                 "class"=>BookCategory::class,
                 "label"=>"Catégorie",
@@ -46,12 +44,21 @@ class BookType extends AbstractType
             ->remove('updatedAt')
             ->remove('slug')
         ;
+        if(!$options["fromAuthor"]) {
+            $builder
+            ->add('author', EntityType::class, [
+                "class"=>Author::class,
+                "label"=>"Auteur(e)",
+                "required"=>true]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Book::class,
+            "fromAuthor"=>false,
+            "imageRequired"=>true,
         ]);
     }
 }

@@ -26,7 +26,7 @@
                     </a>
                 </td>
                     
-                <td>{{ book_page.updatedAt ? book_page.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ book_page.updatedAt ? book_page.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
                 <td class="text-end">
                     <a href="{{ path('app_admin_book_page_show', {'id': book_page.id}) }}" class="btn btn-dark">
                         <i class="align-middle" data-feather="eye"></i>
